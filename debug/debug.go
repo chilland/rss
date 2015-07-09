@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-
-	"github.com/SlyMarbo/rss"
+	"github.com/LuckyBeaver/rss"
 )
 
 func main() {

@@ -5,6 +5,9 @@ import (
 	"encoding/xml"
 	"fmt"
 	"time"
+	"hash/fnv"
+	"io"
+	"strconv"
 )
 
 func parseAtom(data []byte, read *db) (*Feed, error) {
@@ -33,9 +36,17 @@ func parseAtom(data []byte, read *db) (*Feed, error) {
 
 	// Process items.
 	for _, item := range feed.Items {
+		if item.ID == `` {
+			hasher := fnv.New64()
+			io.WriteString(hasher, item.Title)
+			io.WriteString(hasher, item.Date)
+			item.ID = strconv.FormatInt(int64(hasher.Sum64()), 10)
+		}
+
+
 
 		// Skip items already known.
-		if read.req <- item.ID; <-read.res {
+		if  read.req <- item.ID; <-read.res && item.ID != `` {
 			continue
 		}
 

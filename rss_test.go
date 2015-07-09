@@ -16,6 +16,7 @@ func Test_ParseTitle(t *testing.T) {
 		"rss_2.0-1":  "Liftoff News",
 		"atom_1.0":   "Titel des Weblogs",
 		"atom_1.0-1": "Golem.de",
+		"atom_1.0-2": "Журнал о бизнесе «Секрет фирмы»'",
 	}
 
 	for k, v := range m {
