@@ -31,7 +31,7 @@ func parseTime(s string) (time.Time, error) {
 	var e error
 	var t time.Time
 
-	ts, e := strconv.ParseInt(t, 64, 10)
+	ts, e := strconv.ParseInt(s, 64, 10)
 	if e == nil {
 		return time.Unix(ts, 0), e
 	}
