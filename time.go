@@ -3,6 +3,7 @@ package rss
 import (
 	"strings"
 	"time"
+	"strconv"
 )
 
 func parseTime(s string) (time.Time, error) {
@@ -29,7 +30,12 @@ func parseTime(s string) (time.Time, error) {
 	
 	var e error
 	var t time.Time
-	
+
+	ts, e := strconv.ParseInt(t, 64, 10)
+	if e == nil {
+		return time.Unix(ts, 0), e
+	}
+
 	for _, format := range formats {
 		t, e = time.Parse(format, s)
 		if e == nil {
