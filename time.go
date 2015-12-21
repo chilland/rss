@@ -8,8 +8,8 @@ import (
 
 func parseTime(s string) (time.Time, error) {
 	formats := []string{
-		`2006-01-02 15:04:05 -0700`,
-		`08 Jan 2006 15:04:05 -0700`,
+		`2006-01-02 15:04:05 -07`,
+		`02 Jan 2006 15:04:05 -0700`,
 		"Mon, 02 Jan 06 15:04:05 -0700",
 		"Mon, 02 January 2006 15:04:05 -0700",
 		"Mon, _2 Jan 2006 15:04:05 MST",
@@ -24,6 +24,10 @@ func parseTime(s string) (time.Time, error) {
 		time.RFC1123Z,
 		time.RFC3339,
 		time.RFC3339Nano,
+		`2006-01-02 15:04:05`,
+		`2006-01-02T15:04:05`,
+		`02/01/2006 - 15:04`,
+		`Mon, 02 Jan 2006 15:04:05`,
 	}
 
 	s = strings.TrimSpace(s)
@@ -31,7 +35,7 @@ func parseTime(s string) (time.Time, error) {
 	var e error
 	var t time.Time
 
-	ts, e := strconv.ParseInt(s, 64, 10)
+	ts, e := strconv.ParseInt(s, 10, 64)
 	if e == nil {
 		return time.Unix(ts, 0), e
 	}
