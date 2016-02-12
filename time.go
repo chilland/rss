@@ -1,9 +1,9 @@
 package rss
 
 import (
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 )
 
 func parseTime(s string) (time.Time, error) {
@@ -35,10 +35,12 @@ func parseTime(s string) (time.Time, error) {
 		`Mon, 02 Jan 2006 15:4:5 MST`,
 		`02.01.2006 15:04:05`,
 		`2006-01-02T15:04:05-0700`,
+		"2006-01-02",
+		"01-02-2006",
 	}
 
 	s = strings.TrimSpace(s)
-	
+
 	var e error
 	var t time.Time
 
@@ -53,6 +55,6 @@ func parseTime(s string) (time.Time, error) {
 			return t, e
 		}
 	}
-	
+
 	return time.Time{}, e
 }
