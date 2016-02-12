@@ -90,13 +90,13 @@ func parseRSS2(data []byte, read *db) (*Feed, error) {
 		if item.Date != "" {
 			next.Date, err = parseTime(item.Date)
 			if err != nil {
-				fmt.Printf("%s \n Using nil time.Time()", err)
+				fmt.Printf("Using nil time.Time(). %s", err)
 				next.Date = time.Time{}
 			}
 		} else if item.PubDate != "" {
 			next.Date, err = parseTime(item.PubDate)
 			if err != nil {
-				fmt.Printf("%s \n Using nil time.Time()", err)
+				fmt.Printf("Using nil time.Time(). %s", err)
 				next.Date = time.Time{}
 			}
 		}
